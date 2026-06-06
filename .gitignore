@@ -1,0 +1,21 @@
+# Fichiers de données volumineux (bloqués par la limite de 100 Mo de GitHub)
+Cell_Phones_and_Accessories_5.json
+
+# Modèle d'IA fine-tuné et checkpoints (très lourds, plusieurs centaines de Mo/Go)
+fine_tuned_distilbert/
+results/
+logs/
+
+# Python cache et fichiers temporaires
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+.pytest_cache/
+.vscode/
+
+# Base de données SQLite (Optionnel)
+# Note : Si votre enseignant a absolument besoin de la base de données pré-remplie, 
+# vous pouvez commenter la ligne ci-dessous en ajoutant un '#' devant.
+# electro_marjane.db
