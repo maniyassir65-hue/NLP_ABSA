@@ -62,7 +62,7 @@ flowchart TD
 
     subgraph Pipeline["Pipeline NLP & Inférence"]
         C -->|1. Nettoyage NLTK Stopwords| E["Texte Nettoyé"]
-        E -->|2. Segmentation par Clauses (Regex)| F["Segments de Phrases"]
+        E -->|2. Segmentation par Clauses - Regex| F["Segments de Phrases"]
         F -->|3. Ontologie de Mots-Clés| G["Aspect Détecté"]
         G & D -->|4. Inférence DistilBERT Local| H["Sentiment Prédit par Aspect"]
     end
