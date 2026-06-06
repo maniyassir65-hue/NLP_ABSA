@@ -51,29 +51,29 @@ Le flux de données se décompose en 5 phases majeures, de l'ingestion brute à 
 
 ```mermaid
 flowchart TD
-    subgraph Ingestion
+    subgraph Ingestion["Ingestion"]
         A["Fichier Source Amazon JSON<br>(141 Mo - Cell Phones & Accessories)"] --> B["Script de Fine-Tuning<br>(finetune_transformer.py)"]
         A --> C["Moteur d'Analyse NLP<br>(moteur_nlp_absa.py)"]
     end
 
-    subgraph Apprentissage (Fine-Tuning)
+    subgraph Apprentissage["Apprentissage (Fine-Tuning)"]
         B -->|Entraînement GPU 1650 4Go + Mixed Precision| D["Modèle Fine-tuné localement<br>(./fine_tuned_distilbert)"]
     end
 
-    subgraph Pipeline NLP & Inférence
+    subgraph Pipeline["Pipeline NLP & Inférence"]
         C -->|1. Nettoyage NLTK Stopwords| E["Texte Nettoyé"]
         E -->|2. Segmentation par Clauses (Regex)| F["Segments de Phrases"]
         F -->|3. Ontologie de Mots-Clés| G["Aspect Détecté"]
         G & D -->|4. Inférence DistilBERT Local| H["Sentiment Prédit par Aspect"]
     end
 
-    subgraph Stockage Relationnel
+    subgraph Stockage["Stockage Relationnel"]
         H -->|Insertion SQL| I[("Base SQLite<br>(electro_marjane.db)")]
         I -->|Table 1| I1["Avis_Bruts<br>(Métadonnées, Étoiles)"]
         I -->|Table 2| I2["Analyses_ABSA<br>(Aspects, Sentiments, Confiance)"]
     end
 
-    subgraph Visualisation Décisionnelle
+    subgraph Visualisation["Visualisation Décisionnelle"]
         I1 & I2 -->|Connexion ODBC| J["Tableau de bord Power BI<br>(dash.pbix)"]
         J --> K1["Rapport Décisionnel (Direction)"]
         J --> K2["Rapport Opérationnel (SAV / Alertes)"]
